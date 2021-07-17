@@ -5,7 +5,7 @@
     <artifactId>is1_projekat</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>is1_projekat-1.0-SNAPSHOT</name>
+    <name>is1_projekat</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
