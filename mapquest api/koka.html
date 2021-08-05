@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <form action="" id="myForm">
+        <input type="text" name="" id="search">
+        <button type="submit"> ok </button>
+    </form>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $("#myForm").submit(function (e) {
+            e.preventDefault();
+            search = $("#search").val();
+
+            //     var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}
+            //   &part=snippet&q=${search}&maxResults=${maxResults}&publishedAfter=${afterdate}&publishedBefore=${beforedate}&order=${order}&videoDuration=${duration}&type=video`;
+            var url = 'http://www.mapquestapi.com/directions/v2/route?key=Ikb5AVafANEwyIA1Awi5SNHrqpPdWNGo&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA';
+            $.ajax({
+                method: "GET",
+                url: url,
+                success: function (data) {
+                    console.log(data);
+                },
+            });
+
+        })
+
+    })
+
+
+</script>
+
+</html>
