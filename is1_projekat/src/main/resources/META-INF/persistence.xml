@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-  <!-- Define Persistence Unit -->
-  <persistence-unit name="my_persistence_unit" transactionType="JTA">
-    <jta-data-resource>is1_projekat_Resource</jta-data-resource>
-    <exclude-unlistet-clases>false</exclude-unlistet-clases>
-    <class>entities.Planer</class>
-    <class>entities.Alarm</class>
-    <class>entities.Pesma</class>
-    <class>entities.Obaveza</class>
-    <class>entities.Korisnik</class>
-    <class>entities.Lokacija</class>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="my_per" transaction-type="JTA">
+    <jta-data-source>is1_projekat_Resource</jta-data-source>
+    <class>resources.entities.Alarm</class>
+    <class>resources.entities.Korisnik</class>
+    <class>resources.entities.Lokacija</class>
+    <class>resources.entities.Obaveza</class>
+    <class>resources.entities.Pesma</class>
+    <class>resources.entities.Planer</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/is1_projekat?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="localhost123"/>
+    </properties>
   </persistence-unit>
 </persistence>

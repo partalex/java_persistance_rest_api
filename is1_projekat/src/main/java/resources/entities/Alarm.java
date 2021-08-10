@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package resources.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -132,7 +132,7 @@ public class Alarm implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Alarm[ idAlarm=" + idAlarm + " ]";
+        return "resources.entities.Alarm[ idAlarm=" + idAlarm + " ]";
     }
     
 }

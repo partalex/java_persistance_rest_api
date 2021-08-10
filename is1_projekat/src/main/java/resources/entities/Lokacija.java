@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package resources.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -40,10 +40,8 @@ public class Lokacija implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "idLokacija")
     private String idLokacija;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destnacija")
+    @OneToMany(mappedBy = "destnacija")
     private List<Obaveza> obavezaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pocetnaLokacija")
-    private List<Obaveza> obavezaList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kuca")
     private List<Korisnik> korisnikList;
 
@@ -69,15 +67,6 @@ public class Lokacija implements Serializable {
 
     public void setObavezaList(List<Obaveza> obavezaList) {
         this.obavezaList = obavezaList;
-    }
-
-    @XmlTransient
-    public List<Obaveza> getObavezaList1() {
-        return obavezaList1;
-    }
-
-    public void setObavezaList1(List<Obaveza> obavezaList1) {
-        this.obavezaList1 = obavezaList1;
     }
 
     @XmlTransient
@@ -111,7 +100,7 @@ public class Lokacija implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Lokacija[ idLokacija=" + idLokacija + " ]";
+        return "resources.entities.Lokacija[ idLokacija=" + idLokacija + " ]";
     }
     
 }

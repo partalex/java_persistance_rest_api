@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package resources.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pesma.findAll", query = "SELECT p FROM Pesma p"),
-    @NamedQuery(name = "Pesma.findByIdPesma", query = "SELECT p FROM Pesma p WHERE p.idPesma = :idPesma")})
+    @NamedQuery(name = "Pesma.findByIdPesma", query = "SELECT p FROM Pesma p WHERE p.idPesma = :idPesma"),
+    @NamedQuery(name = "Pesma.findByVideoId", query = "SELECT p FROM Pesma p WHERE p.videoId = :videoId")})
 public class Pesma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,11 @@ public class Pesma implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "idPesma")
     private String idPesma;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "videoId")
+    private String videoId;
     @ManyToMany(mappedBy = "pesmaList")
     private List<Korisnik> korisnikList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "zvono")
@@ -53,12 +59,25 @@ public class Pesma implements Serializable {
         this.idPesma = idPesma;
     }
 
+    public Pesma(String idPesma, String videoId) {
+        this.idPesma = idPesma;
+        this.videoId = videoId;
+    }
+
     public String getIdPesma() {
         return idPesma;
     }
 
     public void setIdPesma(String idPesma) {
         this.idPesma = idPesma;
+    }
+
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 
     @XmlTransient
@@ -101,7 +120,7 @@ public class Pesma implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Pesma[ idPesma=" + idPesma + " ]";
+        return "resources.entities.Pesma[ idPesma=" + idPesma + " ]";
     }
     
 }

@@ -27,7 +27,7 @@ $(document).ready(function () {
             success: function (data) {
                 search_results = data;
                 console.log(search_results);
-                search_results["items"].forEach(element => console.log(element));
+                // search_results["items"].forEach(element => console.log(element));
                 $("#btn").attr("disabled", false);
                 // displayVideos(data);
             },

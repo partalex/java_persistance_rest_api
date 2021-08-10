@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package resources.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Korisnik.findAll", query = "SELECT k FROM Korisnik k"),
-    @NamedQuery(name = "Korisnik.findByIdKorisnik", query = "SELECT k FROM Korisnik k WHERE k.idKorisnik = :idKorisnik")})
+    @NamedQuery(name = "Korisnik.findByIdKorisnik", query = "SELECT k FROM Korisnik k WHERE k.idKorisnik = :idKorisnik"),
+    @NamedQuery(name = "Korisnik.findBySifra", query = "SELECT k FROM Korisnik k WHERE k.sifra = :sifra")})
 public class Korisnik implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,11 +43,18 @@ public class Korisnik implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "idKorisnik")
     private String idKorisnik;
-    @JoinTable(name = "korisnik_slusao", joinColumns = {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "sifra")
+    private String sifra;
+
+    @JoinTable(name = "korisnik_pesma", joinColumns = {
         @JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik")}, inverseJoinColumns = {
         @JoinColumn(name = "pesma", referencedColumnName = "idPesma")})
     @ManyToMany
     private List<Pesma> pesmaList;
+    
     @JoinColumn(name = "kuca", referencedColumnName = "idLokacija")
     @ManyToOne(optional = false)
     private Lokacija kuca;
@@ -61,12 +69,25 @@ public class Korisnik implements Serializable {
         this.idKorisnik = idKorisnik;
     }
 
+    public Korisnik(String idKorisnik, String sifra) {
+        this.idKorisnik = idKorisnik;
+        this.sifra = sifra;
+    }
+
     public String getIdKorisnik() {
         return idKorisnik;
     }
 
     public void setIdKorisnik(String idKorisnik) {
         this.idKorisnik = idKorisnik;
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
     }
 
     @XmlTransient
@@ -116,7 +137,7 @@ public class Korisnik implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Korisnik[ idKorisnik=" + idKorisnik + " ]";
+        return "resources.entities.Korisnik[ idKorisnik=" + idKorisnik + " ]";
     }
-    
+
 }

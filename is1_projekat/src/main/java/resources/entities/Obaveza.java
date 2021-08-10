@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package resources.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -62,11 +62,8 @@ public class Obaveza implements Serializable {
     @ManyToMany
     private List<Planer> planerList;
     @JoinColumn(name = "destnacija", referencedColumnName = "idLokacija")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Lokacija destnacija;
-    @JoinColumn(name = "pocetna_lokacija", referencedColumnName = "idLokacija")
-    @ManyToOne(optional = false)
-    private Lokacija pocetnaLokacija;
 
     public Obaveza() {
     }
@@ -122,14 +119,6 @@ public class Obaveza implements Serializable {
         this.destnacija = destnacija;
     }
 
-    public Lokacija getPocetnaLokacija() {
-        return pocetnaLokacija;
-    }
-
-    public void setPocetnaLokacija(Lokacija pocetnaLokacija) {
-        this.pocetnaLokacija = pocetnaLokacija;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -152,7 +141,7 @@ public class Obaveza implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Obaveza[ idObaveza=" + idObaveza + " ]";
+        return "resources.entities.Obaveza[ idObaveza=" + idObaveza + " ]";
     }
     
 }
