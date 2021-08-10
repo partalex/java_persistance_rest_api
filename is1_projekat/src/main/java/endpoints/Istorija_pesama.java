@@ -44,19 +44,17 @@ public class Istorija_pesama {
             return "Nepostojec videoId";
         }
         try {
-            String chrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            String chrome = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
             String arg = "youtube.com\\watch?v=" + videoID;
 
             ProcessBuilder pb = new ProcessBuilder(chrome, arg);
             Process process = pb.start();
-
-            int trajanje;
-//            int trajanje = pesma.get(0).getTrajanje() * 1000;
-            trajanje = 2000;
+            int trajanje = pesma.get(0).getTrajanje() * 1000;
             Thread.sleep(trajanje);
-            process.destroy();
-            if (process.isAlive()) {
+            System.out.println("nije crkao");
+//            process.destroy();
                 process.destroyForcibly();
+            if (process.isAlive()) {
                 System.out.println("nije crkao");
             }
         } catch (IOException | InterruptedException e) {
