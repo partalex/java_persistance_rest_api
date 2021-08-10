@@ -48,13 +48,11 @@ public class Korisnik implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "sifra")
     private String sifra;
-
     @JoinTable(name = "korisnik_pesma", joinColumns = {
         @JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik")}, inverseJoinColumns = {
         @JoinColumn(name = "pesma", referencedColumnName = "idPesma")})
     @ManyToMany
     private List<Pesma> pesmaList;
-    
     @JoinColumn(name = "kuca", referencedColumnName = "idLokacija")
     @ManyToOne(optional = false)
     private Lokacija kuca;
@@ -139,5 +137,5 @@ public class Korisnik implements Serializable {
     public String toString() {
         return "resources.entities.Korisnik[ idKorisnik=" + idKorisnik + " ]";
     }
-
+    
 }

@@ -11,14 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import filters.BasicAuthFilter;
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 import javax.ws.rs.PathParam;
 import resources.entities.Korisnik;
 import resources.entities.Pesma;
@@ -44,28 +39,27 @@ public class Istorija_pesama {
     @Path("{videoID}")
     @GET
     public String pustiPesmu(@PathParam("videoID") String videoID) throws InterruptedException {
+        List<Pesma> pesma = em.createQuery("SELECT k FROM Pesma k WHERE k.videoId = :videoId", Pesma.class).setParameter("videoId", videoID).getResultList();
+        if (pesma.isEmpty()) {
+            return "Nepostojec videoId";
+        }
         try {
+            String chrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            String arg = "youtube.com\\watch?v=" + videoID;
 
-            Thread thread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        ProcessBuilder pb
-                                = new ProcessBuilder(
-                                        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                                        "youtube.com\\watch?v=hPQGj6G0mD8&t");
+            ProcessBuilder pb = new ProcessBuilder(chrome, arg);
+            Process process = pb.start();
 
-                        pb.start();
-
-                        System.out.println("Google Chrome launched!");
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
-                }
-            };
-            thread.start();
-            thread.join(4000);
-        } catch (InterruptedException e) {
+            int trajanje;
+//            int trajanje = pesma.get(0).getTrajanje() * 1000;
+            trajanje = 2000;
+            Thread.sleep(trajanje);
+            process.destroy();
+            if (process.isAlive()) {
+                process.destroyForcibly();
+                System.out.println("nije crkao");
+            }
+        } catch (IOException | InterruptedException e) {
             System.out.println("endpoints.Istorija_pesama.pustiPesmu()");
         }
 

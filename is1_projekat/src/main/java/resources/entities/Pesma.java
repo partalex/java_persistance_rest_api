@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Pesma.findAll", query = "SELECT p FROM Pesma p"),
     @NamedQuery(name = "Pesma.findByIdPesma", query = "SELECT p FROM Pesma p WHERE p.idPesma = :idPesma"),
-    @NamedQuery(name = "Pesma.findByVideoId", query = "SELECT p FROM Pesma p WHERE p.videoId = :videoId")})
+    @NamedQuery(name = "Pesma.findByVideoId", query = "SELECT p FROM Pesma p WHERE p.videoId = :videoId"),
+    @NamedQuery(name = "Pesma.findByTrajanje", query = "SELECT p FROM Pesma p WHERE p.trajanje = :trajanje")})
 public class Pesma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +48,10 @@ public class Pesma implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "videoId")
     private String videoId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "trajanje")
+    private int trajanje;
     @ManyToMany(mappedBy = "pesmaList")
     private List<Korisnik> korisnikList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "zvono")
@@ -59,9 +64,10 @@ public class Pesma implements Serializable {
         this.idPesma = idPesma;
     }
 
-    public Pesma(String idPesma, String videoId) {
+    public Pesma(String idPesma, String videoId, int trajanje) {
         this.idPesma = idPesma;
         this.videoId = videoId;
+        this.trajanje = trajanje;
     }
 
     public String getIdPesma() {
@@ -78,6 +84,14 @@ public class Pesma implements Serializable {
 
     public void setVideoId(String videoId) {
         this.videoId = videoId;
+    }
+
+    public int getTrajanje() {
+        return trajanje;
+    }
+
+    public void setTrajanje(int trajanje) {
+        this.trajanje = trajanje;
     }
 
     @XmlTransient
