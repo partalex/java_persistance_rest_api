@@ -13,11 +13,9 @@ import javax.ws.rs.Path;
 import filters.BasicAuthFilter;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.ws.rs.PathParam;
 import resources.entities.Korisnik;
 import resources.entities.Pesma;
-
 /**
  *
  * @author SKT BABA ZOKA
@@ -51,16 +49,10 @@ public class Istorija_pesama {
             Process process = pb.start();
             int trajanje = pesma.get(0).getTrajanje() * 1000;
             Thread.sleep(trajanje);
-            System.out.println("nije crkao");
-//            process.destroy();
-                process.destroyForcibly();
-            if (process.isAlive()) {
-                System.out.println("nije crkao");
-            }
+            process.destroy();
         } catch (IOException | InterruptedException e) {
             System.out.println("endpoints.Istorija_pesama.pustiPesmu()");
         }
-
         return videoID;
     }
 
